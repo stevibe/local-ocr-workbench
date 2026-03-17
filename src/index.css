@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  --canvas: #f5efe6;
+  --surface: rgba(255, 250, 245, 0.78);
+  --surface-strong: rgba(255, 255, 255, 0.82);
+  --ink: #45515d;
+  --ink-strong: #1d2933;
+  --muted: #7d6d61;
+  --line: rgba(53, 69, 81, 0.12);
+  --line-strong: rgba(53, 69, 81, 0.22);
+  --accent: #c45b34;
+  --accent-soft: rgba(196, 91, 52, 0.14);
+  --danger: #8f3015;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  background: var(--canvas);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.56), rgba(245, 239, 230, 0)),
+    var(--canvas);
+  color: var(--ink);
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+@layer components {
+  .panel {
+    @apply relative flex h-full flex-col rounded-[2rem] border border-white/50 bg-[rgba(248,244,239,0.78)] p-5 shadow-[0_24px_70px_rgba(26,34,40,0.08)] backdrop-blur md:p-6;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.3em] text-[var(--muted)];
+  }
+
+  .section-title {
+    @apply mt-2 max-w-xl font-display text-2xl leading-tight text-[var(--ink-strong)] sm:text-[2rem];
+  }
+
+  .markdown-preview {
+    @apply max-w-none text-[14px] leading-tight text-black;
+  }
+
+  .markdown-preview > *:first-child {
+    @apply mt-0;
+  }
+
+  .markdown-preview > *:last-child {
+    @apply mb-0;
+  }
+
+  .markdown-preview h1,
+  .markdown-preview h2,
+  .markdown-preview h3,
+  .markdown-preview h4 {
+    @apply mt-8 font-display leading-tight text-[var(--ink-strong)];
+  }
+
+  .markdown-preview h1 {
+    @apply text-4xl;
+  }
+
+  .markdown-preview h2 {
+    @apply text-3xl;
+  }
+
+  .markdown-preview h3 {
+    @apply text-2xl;
+  }
+
+  .markdown-preview p,
+  .markdown-preview ul,
+  .markdown-preview ol,
+  .markdown-preview blockquote,
+  .markdown-preview pre,
+  .markdown-preview table {
+    @apply my-4;
+  }
+
+  .markdown-preview ul {
+    @apply list-disc pl-6;
+  }
+
+  .markdown-preview ol {
+    @apply list-decimal pl-6;
+  }
+
+  .markdown-preview li + li {
+    @apply mt-2;
+  }
+
+  .markdown-preview a {
+    @apply text-[var(--accent)] underline decoration-[rgba(196,91,52,0.35)] underline-offset-4;
+  }
+
+  .markdown-preview blockquote {
+    @apply rounded-r-2xl border-l-4 border-[var(--accent)] bg-[var(--accent-soft)] px-4 py-3 italic text-[var(--ink-strong)];
+  }
+
+  .markdown-preview code {
+    @apply rounded-md bg-[rgba(29,41,51,0.08)] px-1.5 py-0.5 font-mono text-[0.92em] text-[var(--ink-strong)];
+  }
+
+  .markdown-preview pre {
+    @apply overflow-x-auto rounded-[1.25rem] bg-[rgba(20,31,38,0.96)] p-4 text-slate-100;
+  }
+
+  .markdown-preview pre code {
+    @apply bg-transparent p-0 text-inherit;
+  }
+
+  .markdown-preview table {
+    @apply w-full overflow-hidden rounded-[1rem] border border-[var(--line)] border-separate border-spacing-0;
+  }
+
+  .markdown-preview th {
+    @apply bg-[rgba(29,41,51,0.06)] px-3 py-2 text-left font-semibold text-[var(--ink-strong)];
+  }
+
+  .markdown-preview td {
+    @apply border-t border-[var(--line)] px-3 py-2 align-top;
+  }
+
+  .markdown-preview .katex-display {
+    @apply my-6 overflow-x-auto overflow-y-hidden py-1;
+  }
+}
