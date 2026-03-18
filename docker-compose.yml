@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_OCR_BASE_URL: ${VITE_OCR_BASE_URL:-/api/proxy}
+        VITE_OCR_ENDPOINT: ${VITE_OCR_ENDPOINT:-/api/generate}
+        VITE_OCR_MODEL: ${VITE_OCR_MODEL:-glm-ocr}
+    container_name: local-ocr-workbench
+    ports:
+      - "${PORT:-80}:80"
+    # Enable access to Ollama on host machine (Linux Docker support)
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

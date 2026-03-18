@@ -100,6 +100,49 @@ The UI does not write back into `.env`. That is expected. `.env` is a file used 
 - `npm run lint`
 - `npm run check`
 
+## Docker Deployment
+
+You can deploy the Local OCR Workbench using Docker for production use.
+
+### Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/)
+- Ollama running and accessible from the Docker container
+
+### Quick Start
+
+```bash
+# Build and run with Docker Compose
+docker-compose up --build -d
+
+# Or specify custom port
+PORT=8080 docker-compose up --build -d
+```
+
+The app will be available at http://localhost (or your custom port).
+
+### Configuration
+
+Set environment variables via Docker Compose or build args:
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `VITE_OCR_BASE_URL` | `/api/proxy` | OCR API base URL |
+| `VITE_OCR_ENDPOINT` | `/api/generate` | OCR API endpoint |
+| `VITE_OCR_MODEL` | `glm-ocr` | OCR model name |
+| `PORT` | `80` | Host port to expose |
+
+Example with custom configuration:
+```bash
+VITE_OCR_MODEL=my-model PORT=3000 docker-compose up --build -d
+```
+
+### Stopping
+
+```bash
+docker-compose down
+```
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
