@@ -12,6 +12,9 @@ services:
     container_name: local-ocr-workbench
     ports:
       - "${PORT:-80}:80"
+    # Enable access to Ollama on host machine (Linux Docker support)
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
